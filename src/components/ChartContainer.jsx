@@ -1,5 +1,5 @@
 import { CoinHeader } from "./CoinHeader";
-import { PriceSection } from "./Pricesection";
+import { PriceSection } from "./PriceSection";
 import { TradingViewChart } from "./TradingViewChart";
 
 export const ChartContainer = () => {
