@@ -52,7 +52,7 @@ export const TradingViewChart = () => {
         </div>
       </div>
 
-      <div className="h-[500px] w-full">
+      <div className="h-[300px] md:h-[500px] w-full">
         <SymbolOverview
           chartOnly={true}
           symbols={[["BITCOIN", "BTC"]]}
