@@ -180,7 +180,7 @@ export default function Sentiment() {
               <div key={estimate.type} className="flex items-center gap-4">
                 <span className="w-10 text-sm">{estimate.type}</span>
                 <div
-                  className={`h-2.5 rounded-full ${estimate.color}`}
+                  className={`h-2.5 rounded-full ${estimate.color || "bg-red-500"}`}
                   style={{ width: `${estimate.percentage}%` }}
                 />
                 <span className="w-10 text-sm">{estimate.percentage}%</span>
