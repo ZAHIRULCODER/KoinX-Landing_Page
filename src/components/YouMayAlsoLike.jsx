@@ -1,7 +1,7 @@
 "use client";
 
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { useState, useEffect, useMemo } from "react";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import axios from "axios";
 import HeadingText from "./HeadingText";
 
@@ -53,12 +53,11 @@ const CryptoSlider = ({
   isMobile,
   windowWidth,
 }) => {
-  const { cardWidth, maxSlides, translateValue } = useMemo(() => {
+  const { cardWidth, maxSlides, translateValue, cardsPerView } = useMemo(() => {
     let cardsPerView;
     if (isMobile) {
       cardsPerView = 1;
     } else if (windowWidth < 1280) {
-      // md breakpoint
       cardsPerView = 3;
     } else {
       cardsPerView = 4;
@@ -70,7 +69,7 @@ const CryptoSlider = ({
     const maxSlides = data.length - cardsPerView;
     const translateValue = -(activeSlide * (cardWidth + gap));
 
-    return { cardWidth, maxSlides, translateValue };
+    return { cardWidth, maxSlides, translateValue, cardsPerView };
   }, [isMobile, windowWidth, activeSlide, data.length]);
 
   return (
@@ -89,12 +88,22 @@ const CryptoSlider = ({
 
         <button
           onClick={() => onPrev(maxSlides)}
-          className="absolute -left-4 top-1/2 -translate-y-1/2 bg-white shadow-lg border rounded-full p-2 hover:bg-gray-100">
+          disabled={activeSlide === 0}
+          className={`absolute -left-4 top-1/2 -translate-y-1/2 bg-white shadow-lg border rounded-full p-2 transition-opacity ${
+            activeSlide === 0
+              ? "opacity-50 cursor-not-allowed"
+              : "hover:bg-gray-100"
+          }`}>
           <ChevronLeftIcon className="w-6 h-6" />
         </button>
         <button
           onClick={() => onNext(maxSlides)}
-          className="absolute -right-4 top-1/2 -translate-y-1/2 bg-white shadow-lg border rounded-full p-2 hover:bg-gray-100">
+          disabled={activeSlide >= maxSlides}
+          className={`absolute -right-4 top-1/2 -translate-y-1/2 bg-white shadow-lg border rounded-full p-2 transition-opacity ${
+            activeSlide >= maxSlides
+              ? "opacity-50 cursor-not-allowed"
+              : "hover:bg-gray-100"
+          }`}>
           <ChevronRightIcon className="w-6 h-6" />
         </button>
       </div>
